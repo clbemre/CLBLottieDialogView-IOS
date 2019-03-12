@@ -16,7 +16,7 @@ pod 'SnapKit', '~> 4.0.0'
 
 ### Manuel Install
 Copy the files to your project.
-```
+```swift
 CLBLottieDialogView.swift
 Utils.swift
 Constants.swift
