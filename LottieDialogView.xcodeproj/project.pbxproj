@@ -25,6 +25,7 @@
 		09FD1BF72237A8A9005B03DF /* DialogView.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FD1BF52237A8A9005B03DF /* DialogView.png */; };
 		09FD1BFA2237BE0B005B03DF /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD1BF92237BE0B005B03DF /* Contants.swift */; };
 		09FD1BFD2237BE8D005B03DF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD1BFC2237BE8D005B03DF /* UIView+Extensions.swift */; };
+		09FD1BFF2237EED1005B03DF /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FD1BFE2237EED1005B03DF /* UIButton+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		09FD1BF52237A8A9005B03DF /* DialogView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DialogView.png; sourceTree = "<group>"; };
 		09FD1BF92237BE0B005B03DF /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		09FD1BFC2237BE8D005B03DF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		09FD1BFE2237EED1005B03DF /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		29753E060838D586DFF6B006 /* Pods_LottieDialogView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LottieDialogView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CC62BF8A416F9E127F20EB /* Pods-LottieDialogView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LottieDialogView.release.xcconfig"; path = "Pods/Target Support Files/Pods-LottieDialogView/Pods-LottieDialogView.release.xcconfig"; sourceTree = "<group>"; };
 		EB7876164A2025BAEC757B80 /* Pods-LottieDialogView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LottieDialogView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LottieDialogView/Pods-LottieDialogView.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				09FD1BFC2237BE8D005B03DF /* UIView+Extensions.swift */,
+				09FD1BFE2237EED1005B03DF /* UIButton+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09FD1BFD2237BE8D005B03DF /* UIView+Extensions.swift in Sources */,
+				09FD1BFF2237EED1005B03DF /* UIButton+Extensions.swift in Sources */,
 				09AB62F822328A6B00B7C07D /* ViewController.swift in Sources */,
 				09AB630E22328C5E00B7C07D /* CLBLottieDialogView.swift in Sources */,
 				09FD1BFA2237BE0B005B03DF /* Contants.swift in Sources */,

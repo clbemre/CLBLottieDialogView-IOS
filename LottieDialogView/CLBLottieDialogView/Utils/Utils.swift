@@ -36,10 +36,12 @@ class Utils {
         button.setTitleColor(Utils.hexStringToUIColor(hex: "#393939"), for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14.0)
         button.backgroundColor = Utils.hexStringToUIColor(hex: "#e6e6e6").withAlphaComponent(0.5)
-        button.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+        // button.setBackgroundColor(color: Utils.hexStringToUIColor(hex: "#e6e6e6").withAlphaComponent(0.5), forState: .normal)
+        // button.setBackgroundColor(color: UIColor.green, forState: UIControl.State.highlighted)
         button.layer.cornerRadius = 5.0
-        button.clipsToBounds = true
-        button.layer.masksToBounds = false
+        button.layer.masksToBounds = true
+        button.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+
         return button
     }
 }
