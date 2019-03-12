@@ -1,6 +1,8 @@
 # CLBLottieDialogView-IOS
 This repository provides a alert dialog view with lottie customization.
 
+image::LottieDialogView/ScreenShot/DialogView.png[200,400]
+
 ### For Android
 See [LottieAlertDialog](https://github.com/mayuce/LottieAlertDialog/blob/master/readme.adoc)
 
