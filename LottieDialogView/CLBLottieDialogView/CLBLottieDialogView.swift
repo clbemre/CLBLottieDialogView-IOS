@@ -219,6 +219,7 @@ class CLBLottieDialogView: UIViewController {
         }
         self.containerView.addSubview(self.stackButtonsView)
         self.stackButtonsView.snp.makeConstraints { (maker) in
+            maker.width.lessThanOrEqualTo(self.view.frame.size.width - 100.0)
             maker.top.equalTo(self.messageLabel.snp.bottom).offset(32.0)
             maker.height.equalTo(self.buttonHeight)
             maker.centerX.equalTo(self.containerView)
@@ -232,11 +233,17 @@ class CLBLottieDialogView: UIViewController {
 
     func initPositiveButton() {
         self.stackButtonsView.addArrangedSubview(self.positiveButton)
+        self.positiveButton.snp.makeConstraints { (maker) in
+            maker.width.greaterThanOrEqualTo(100)
+        }
         self.positiveButton.addTarget(self, action: #selector(self.actionPositiveButton(sender:)), for: .touchUpInside)
     }
 
     func initNegativeButton() {
         self.stackButtonsView.addArrangedSubview(self.negativeButton)
+        self.negativeButton.snp.makeConstraints { (maker) in
+            maker.width.greaterThanOrEqualTo(100)
+        }
         self.negativeButton.addTarget(self, action: #selector(self.actionNegativeButton(sender:)), for: .touchUpInside)
     }
 
@@ -246,6 +253,8 @@ class CLBLottieDialogView: UIViewController {
             maker.bottom.equalTo(self.containerView).offset(-16.0)
             maker.centerX.equalTo(self.containerView)
             maker.height.equalTo(self.buttonHeight)
+            maker.width.greaterThanOrEqualTo(100)
+            maker.width.lessThanOrEqualTo(self.view.frame.size.width - 100.0)
         }
         self.neutralButton.addTarget(self, action: #selector(self.actionNeutralButton(sender:)), for: .touchUpInside)
     }

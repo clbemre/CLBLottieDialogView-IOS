@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        /*
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             let builder = CLBLottieDialogView.Builder.progressDialog(self, dialogMessage: "Message")
             builder.showProgress()
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
                 builder.hideDialog()
             })
         }
+        */
     }
 
     @IBAction func OpenAlert(_ sender: UIButton) {
@@ -28,7 +30,7 @@ class ViewController: UIViewController {
         config.titleColor = UIColor.white
         config.titleSize = 32.0
         config.containerCornerRadius = 2.0
-        
+
         CLBLottieDialogView.Builder.successDialog(self, configuration: config, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 CLBLottieDialogView.Builder.warningDialog(self, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
@@ -43,7 +45,7 @@ class ViewController: UIViewController {
                     }
                 })
             }
-        })
+        }, negativeButtonText: nil, neutralButtonText: nil)
     }
 
 }

@@ -18,16 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bv4-Bg-U78">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bv4-Bg-U78">
+                                <rect key="frame" x="145" y="318.5" width="85" height="30"/>
+                                <state key="normal" title="Open Dialog"/>
                                 <connections>
                                     <action selector="OpenAlert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rby-Kn-DcY"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Bv4-Bg-U78" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4qI-Jf-dav"/>
+                            <constraint firstItem="Bv4-Bg-U78" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ngl-RG-2uT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
