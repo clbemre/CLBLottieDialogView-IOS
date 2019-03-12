@@ -254,7 +254,7 @@ class CLBLottieDialogView: UIViewController {
             maker.centerX.equalTo(self.containerView)
             maker.height.equalTo(self.buttonHeight)
             maker.width.greaterThanOrEqualTo(100)
-            maker.width.lessThanOrEqualTo(self.view.frame.size.width - 100.0)
+            maker.width.lessThanOrEqualTo(self.view.frame.size.width - 100.0) // -100.0 for containerview leading + trailing + button leading + trailing
         }
         self.neutralButton.addTarget(self, action: #selector(self.actionNeutralButton(sender:)), for: .touchUpInside)
     }
