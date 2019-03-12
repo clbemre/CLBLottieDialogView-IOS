@@ -14,8 +14,9 @@ typealias CLBLottieDialogViewBlock = ((CLBLottieDialogView?) -> Void)?
 
 class CLBLottieDialogView: UIViewController {
 
-    private var buttonHeight: CGFloat = 35.0
-    private let circleViewDivide: CGFloat = 5.0
+    private var buttonHeight: CGFloat = Constants.defaultButtonHeight
+    private var configuration: CLBLottieDialogView.Configuration = Configuration()
+
     private var isAutoDismiss: Bool = true
 
     var dialogType: DialogType = DialogType.SUCCESS {
@@ -45,13 +46,6 @@ class CLBLottieDialogView: UIViewController {
     var dialogMessage: String = "" {
         didSet {
             self.messageLabel.text = self.dialogMessage
-        }
-    }
-
-    var backgroundColor: UIColor? {
-        didSet {
-            self.containerView.backgroundColor = self.backgroundColor
-            self.circleTopView.backgroundColor = self.backgroundColor
         }
     }
 
@@ -115,23 +109,23 @@ class CLBLottieDialogView: UIViewController {
         }
     }
 
-    private func constructor(dialogTitle: String, dialogMessage: String, isAutoDismiss: Bool = true, cornerRadius: CGFloat, backgroundColor: UIColor, loopAnimation: Bool = true, dialogType: DialogType) {
+    private func initial(dialogTitle: String = "", dialogMessage: String = "", configuration: CLBLottieDialogView.Configuration = Configuration(), dialogType: DialogType = DialogType.SUCCESS, isAutoDismiss: Bool = true) {
         self.dialogTitle = dialogTitle
         self.dialogMessage = dialogMessage
         self.isAutoDismiss = isAutoDismiss
         self.dialogType = dialogType
-        self.backgroundColor = backgroundColor
-        self.loopAnimation = loopAnimation
-        self.containerCornerRadius = cornerRadius
+        self.configuration = configuration
     }
 
-    private func constructor(dialogType: DialogType, dialogTitle: String, dialogMessage: String
-                             , isPositiveButton: Bool, positiveButtonText: String, positiveButtonBlock: CLBLottieDialogViewBlock
-                             , isNegativeButton: Bool, negativeButtonText: String, negativeButtonBlock: CLBLottieDialogViewBlock
-                             , isNeutralButton: Bool, neutralButtonText: String, neutralButtonBlock: CLBLottieDialogViewBlock
-                             , cornerRadius: CGFloat, backgroundColor: UIColor, loopAnimation: Bool = true
-                             , isAutoDismiss: Bool = true) {
-        self.constructor(dialogTitle: dialogTitle, dialogMessage: dialogMessage, isAutoDismiss: isAutoDismiss, cornerRadius: cornerRadius, backgroundColor: backgroundColor, loopAnimation: loopAnimation, dialogType: dialogType)
+    private func initial(dialogTitle: String = "", dialogMessage: String = "",
+                         configuration: CLBLottieDialogView.Configuration = Configuration()
+                         , isPositiveButton: Bool, positiveButtonText: String, positiveButtonBlock: CLBLottieDialogViewBlock
+                         , isNegativeButton: Bool, negativeButtonText: String, negativeButtonBlock: CLBLottieDialogViewBlock
+                         , isNeutralButton: Bool, neutralButtonText: String, neutralButtonBlock: CLBLottieDialogViewBlock
+                         , dialogType: DialogType = DialogType.SUCCESS
+                         , isAutoDismiss: Bool = true) {
+
+        self.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration, dialogType: dialogType, isAutoDismiss: isAutoDismiss)
 
         self.isPositiveButton = isPositiveButton
         self.positiveButtonText = positiveButtonText
@@ -158,6 +152,7 @@ class CLBLottieDialogView: UIViewController {
         self.initDialogTitle()
         self.initDialogMessage()
         self.initStackView()
+        self.initConfigurationWithStyle()
     }
 
     func initContainerView() {
@@ -173,12 +168,11 @@ class CLBLottieDialogView: UIViewController {
     func initCircleTopView() {
         self.view.addSubview(self.circleTopView)
         self.circleTopView.snp.makeConstraints { (maker) in
-            maker.width.height.equalTo(self.view.frame.width / self.circleViewDivide)
-            maker.top.equalTo(self.containerView).offset(-(self.view.frame.width / self.circleViewDivide) / 2)
+            maker.width.height.equalTo(self.view.frame.width / Constants.circleViewDivide)
+            maker.top.equalTo(self.containerView).offset(-(self.view.frame.width / Constants.circleViewDivide) / 2)
             maker.centerX.equalTo(self.containerView)
         }
-
-        self.circleTopView.layer.cornerRadius = (self.view.frame.width / self.circleViewDivide) / 2
+        self.circleTopView.layer.cornerRadius = (self.view.frame.width / Constants.circleViewDivide) / 2
     }
 
     func initLottieAnimationView(jsonName: String) {
@@ -198,7 +192,7 @@ class CLBLottieDialogView: UIViewController {
     }
 
     func initDialogTitle() {
-        let titleLabelTopConstraint = ((self.view.frame.width / self.circleViewDivide) / 2) + 8.0
+        let titleLabelTopConstraint = ((self.view.frame.width / Constants.circleViewDivide) / 2) + 8.0
         self.containerView.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { (maker) in
             maker.top.equalTo(self.containerView).offset(titleLabelTopConstraint)
@@ -221,7 +215,7 @@ class CLBLottieDialogView: UIViewController {
         if dialogType == DialogType.PROGRESS {
             self.buttonHeight = 0.0
         } else {
-            self.buttonHeight = 35.0
+            self.buttonHeight = Constants.defaultButtonHeight
         }
         self.containerView.addSubview(self.stackButtonsView)
         self.stackButtonsView.snp.makeConstraints { (maker) in
@@ -254,6 +248,17 @@ class CLBLottieDialogView: UIViewController {
             maker.height.equalTo(self.buttonHeight)
         }
         self.neutralButton.addTarget(self, action: #selector(self.actionNeutralButton(sender:)), for: .touchUpInside)
+    }
+
+    func initConfigurationWithStyle() {
+        self.containerView.layer.cornerRadius = self.configuration.containerCornerRadius
+        self.containerView.backgroundColor = self.configuration.backgroundColor
+        self.circleTopView.backgroundColor = self.configuration.backgroundColor
+        self.titleLabel.font = UIFont.boldSystemFont(ofSize: self.configuration.titleSize)
+        self.titleLabel.textColor = self.configuration.titleColor
+        self.messageLabel.font = UIFont.systemFont(ofSize: self.configuration.messageSize)
+        self.messageLabel.textColor = self.configuration.messageColor
+        self.animationView?.loopAnimation = self.configuration.loonAnimation
     }
 
     func hide() {
@@ -301,8 +306,6 @@ class CLBLottieDialogView: UIViewController {
         let label = UILabel()
         label.numberOfLines = 1
         label.textAlignment = NSTextAlignment.center
-        label.font = UIFont.boldSystemFont(ofSize: 20.0)
-        label.textColor = UIColor.darkGray
         return label
     }()
 
@@ -310,8 +313,6 @@ class CLBLottieDialogView: UIViewController {
         let label = UILabel()
         label.numberOfLines = 5
         label.textAlignment = NSTextAlignment.center
-        label.font = UIFont.systemFont(ofSize: 13.0)
-        label.textColor = UIColor.darkGray
         return label
     }()
 
@@ -347,17 +348,20 @@ class CLBLottieDialogView: UIViewController {
         case PROGRESS = 4
     }
 
+    class Configuration {
+        var titleSize: CGFloat = 20.0
+        var messageSize: CGFloat = 13.0
+        var titleColor: UIColor = UIColor.darkGray
+        var messageColor: UIColor = UIColor.darkGray
+        var backgroundColor: UIColor = UIColor.white
+        var containerCornerRadius: CGFloat = 20.0
+        var loonAnimation: Bool = true
+    }
+
     class Builder {
 
         private var viewController: UIViewController? = nil
         private var alertDialog: CLBLottieDialogView? = nil
-
-        init(viewController: UIViewController) {
-            self.viewController = viewController
-            self.alertDialog = CLBLottieDialogView()
-            self.alertDialog?.modalTransitionStyle = .crossDissolve
-            self.alertDialog?.modalPresentationStyle = .overCurrentContext
-        }
 
         private var dialogTitle: String = ""
         private var dialogMessage: String = ""
@@ -377,6 +381,15 @@ class CLBLottieDialogView: UIViewController {
         private var neutralButtonText = ""
         private var blockNeutralButton: CLBLottieDialogViewBlock = nil
 
+        private var configuration: CLBLottieDialogView.Configuration = Configuration()
+
+        init(viewController: UIViewController) {
+            self.viewController = viewController
+            self.alertDialog = CLBLottieDialogView()
+            self.alertDialog?.modalTransitionStyle = .crossDissolve
+            self.alertDialog?.modalPresentationStyle = .overCurrentContext
+        }
+
         func withTitle(title: String) -> Builder {
             self.dialogTitle = title
             return self
@@ -384,21 +397,6 @@ class CLBLottieDialogView: UIViewController {
 
         func withMessage(message: String) -> Builder {
             self.dialogMessage = message
-            return self
-        }
-
-        func setLoopAnimation(bool: Bool) -> Builder {
-            self.dialogLoopAnimation = bool
-            return self
-        }
-
-        func setBackgroundColor(color: UIColor) -> Builder {
-            self.backgroundColor = color
-            return self
-        }
-
-        func setCornerRadius(radius: CGFloat) -> Builder {
-            self.containerCornerRadius = radius
             return self
         }
 
@@ -429,11 +427,16 @@ class CLBLottieDialogView: UIViewController {
             return self
         }
 
+        func withConfituration(configuration: CLBLottieDialogView.Configuration = Configuration()) -> Builder {
+            self.configuration = configuration
+            return self
+        }
+
         func show(dialogType: DialogType = DialogType.SUCCESS, isAutoDismiss: Bool = true) {
             if dialogType == DialogType.PROGRESS {
-                self.alertDialog?.constructor(dialogTitle: dialogTitle, dialogMessage: dialogMessage, cornerRadius: containerCornerRadius, backgroundColor: backgroundColor, dialogType: .PROGRESS)
+                self.alertDialog?.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration, dialogType: .PROGRESS)
             } else {
-                self.alertDialog?.constructor(dialogType: dialogType, dialogTitle: dialogTitle, dialogMessage: dialogMessage, isPositiveButton: isPositiveButton, positiveButtonText: positiveButtonText, positiveButtonBlock: blockPositiveButton, isNegativeButton: isNegativeButton, negativeButtonText: negativeButtonText, negativeButtonBlock: blockNegativeButton, isNeutralButton: isNeutralButton, neutralButtonText: neutralButtonText, neutralButtonBlock: blockNeutralButton, cornerRadius: containerCornerRadius, backgroundColor: backgroundColor, loopAnimation: dialogLoopAnimation, isAutoDismiss: isAutoDismiss)
+                self.alertDialog?.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration, isPositiveButton: isPositiveButton, positiveButtonText: positiveButtonText, positiveButtonBlock: blockPositiveButton, isNegativeButton: isNegativeButton, negativeButtonText: negativeButtonText, negativeButtonBlock: blockNegativeButton, isNeutralButton: isNeutralButton, neutralButtonText: neutralButtonText, neutralButtonBlock: blockNegativeButton, dialogType: dialogType, isAutoDismiss: isAutoDismiss)
             }
             UIView.animate(withDuration: 0.5) {
                 self.viewController?.present(self.alertDialog!, animated: true, completion: nil)
@@ -441,8 +444,7 @@ class CLBLottieDialogView: UIViewController {
         }
 
         func showProgress() {
-            self.alertDialog?.constructor(dialogTitle: dialogTitle, dialogMessage: dialogMessage, cornerRadius: containerCornerRadius, backgroundColor: backgroundColor, dialogType: .PROGRESS)
-
+            self.alertDialog?.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration, dialogType: .PROGRESS)
             UIView.animate(withDuration: 0.5) {
                 self.viewController?.present(self.alertDialog!, animated: true, completion: nil)
             }
@@ -455,87 +457,67 @@ class CLBLottieDialogView: UIViewController {
 }
 
 extension CLBLottieDialogView.Builder {
-    static func successDialog(_ viewController: UIViewController, dialogTitle: String = "Success!", dialogMessage: String
+    static func successDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Success!", dialogMessage: String
                               , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                               , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
                               , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
             .withMessage(message: dialogMessage)
-            .setBackgroundColor(color: UIColor.white)
-            .setLoopAnimation(bool: true)
-            .setCornerRadius(radius: 10.0)
             .withNeutralButton(title: neutralButtonText, block: blockNeutral)
             .withNegativeButton(title: negativeButtonText, block: blockNegative)
             .withPositiveButton(title: positiveButtonText, block: blockPositive)
+            .withConfituration(configuration: configuration)
         builder.show(dialogType: CLBLottieDialogView.DialogType.SUCCESS, isAutoDismiss: true)
     }
 
-    static func warningDialog(_ viewController: UIViewController, dialogTitle: String = "Warning!", dialogMessage: String
+    static func warningDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Warning!", dialogMessage: String
                               , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                               , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
                               , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
             .withMessage(message: dialogMessage)
-            .setBackgroundColor(color: UIColor.white)
-            .setLoopAnimation(bool: true)
-            .setCornerRadius(radius: 10.0)
             .withNeutralButton(title: neutralButtonText, block: blockNeutral)
             .withNegativeButton(title: negativeButtonText, block: blockNegative)
             .withPositiveButton(title: positiveButtonText, block: blockPositive)
+            .withConfituration(configuration: configuration)
         builder.show(dialogType: CLBLottieDialogView.DialogType.WARNING, isAutoDismiss: true)
     }
 
-    static func questionDialog(_ viewController: UIViewController, dialogTitle: String = "Question!", dialogMessage: String
+    static func questionDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Question!", dialogMessage: String
                                , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                                , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
                                , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
             .withMessage(message: dialogMessage)
-            .setBackgroundColor(color: UIColor.white)
-            .setLoopAnimation(bool: true)
-            .setCornerRadius(radius: 10.0)
             .withNeutralButton(title: neutralButtonText, block: blockNeutral)
             .withNegativeButton(title: negativeButtonText, block: blockNegative)
             .withPositiveButton(title: positiveButtonText, block: blockPositive)
+            .withConfituration(configuration: configuration)
         builder.show(dialogType: CLBLottieDialogView.DialogType.QUESTION, isAutoDismiss: true)
     }
 
-    static func errorDialog(_ viewController: UIViewController, dialogTitle: String = "Error!", dialogMessage: String
+    static func errorDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Error!", dialogMessage: String
                             , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                             , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
                             , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
             .withMessage(message: dialogMessage)
-            .setBackgroundColor(color: UIColor.white)
-            .setLoopAnimation(bool: true)
-            .setCornerRadius(radius: 10.0)
             .withNeutralButton(title: neutralButtonText, block: blockNeutral)
             .withNegativeButton(title: negativeButtonText, block: blockNegative)
             .withPositiveButton(title: positiveButtonText, block: blockPositive)
+            .withConfituration(configuration: configuration)
         builder.show(dialogType: CLBLottieDialogView.DialogType.ERROR, isAutoDismiss: true)
     }
 
-    static func progressDialog(_ viewController: UIViewController, dialogTitle: String = "Please Wait..", dialogMessage: String) -> CLBLottieDialogView.Builder {
+    static func progressDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Please Wait..", dialogMessage: String) -> CLBLottieDialogView.Builder {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
             .withMessage(message: dialogMessage)
-            .setBackgroundColor(color: UIColor.white)
-            .setLoopAnimation(bool: true)
-            .setCornerRadius(radius: 10.0)
+            .withConfituration(configuration: configuration)
         return builder
-    }
-}
-
-extension UIView {
-    func defaultShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
-        layer.shadowOpacity = 0.5
-        layer.shadowRadius = 1.0
-        layer.masksToBounds = false
     }
 }
