@@ -19,16 +19,26 @@ Copy the files to your project.
 ```
 CLBLottieDialogView.swift
 Utils.swift
+Constants.swift
+UIView+Extensions.swift
 animJSON/success.json
 animJSON/warning.json
 animJSON/question.json
 animJSON/error.json
 animJSON/loading.json
+so all files
 ```
 
 ### Usage Dialog
 You may follow the source code to see how it works.
 ```
+let config = CLBLottieDialogView.Configuration()
+        config.backgroundColor = UIColor.red
+        config.titleColor = UIColor.white
+        config.titleSize = 32.0
+        config.containerCornerRadius = 2.0
+        ...
+        
 let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
             .withMessage(message: dialogMessage)
@@ -38,6 +48,7 @@ let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withNeutralButton(title: neutralButtonText, block: blockNeutral)
             .withNegativeButton(title: negativeButtonText, block: blockNegative)
             .withPositiveButton(title: positiveButtonText, block: blockPositive)
+            .withConfituration(configuration: configuration) // optional
 builder.show(dialogType: CLBLottieDialogView.DialogType.SUCCESS, isAutoDismiss: true)
 ```
 ### OR use extension
