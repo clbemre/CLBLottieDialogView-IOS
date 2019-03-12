@@ -119,8 +119,8 @@ class CLBLottieDialogView: UIViewController {
 
     private func initial(dialogTitle: String = "", dialogMessage: String = "",
                          configuration: CLBLottieDialogView.Configuration = Configuration()
-                         , isPositiveButton: Bool, positiveButtonText: String, positiveButtonBlock: CLBLottieDialogViewBlock
                          , isNegativeButton: Bool, negativeButtonText: String, negativeButtonBlock: CLBLottieDialogViewBlock
+                         , isPositiveButton: Bool, positiveButtonText: String, positiveButtonBlock: CLBLottieDialogViewBlock
                          , isNeutralButton: Bool, neutralButtonText: String, neutralButtonBlock: CLBLottieDialogViewBlock
                          , dialogType: DialogType = DialogType.SUCCESS
                          , isAutoDismiss: Bool = true) {
@@ -240,7 +240,7 @@ class CLBLottieDialogView: UIViewController {
     }
 
     func initNegativeButton() {
-        self.stackButtonsView.addArrangedSubview(self.negativeButton)
+        self.stackButtonsView.insertArrangedSubview(self.negativeButton, at: 0)
         self.negativeButton.snp.makeConstraints { (maker) in
             maker.width.greaterThanOrEqualTo(100)
         }
@@ -445,7 +445,8 @@ class CLBLottieDialogView: UIViewController {
             if dialogType == DialogType.PROGRESS {
                 self.alertDialog?.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration, dialogType: .PROGRESS)
             } else {
-                self.alertDialog?.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration, isPositiveButton: isPositiveButton, positiveButtonText: positiveButtonText, positiveButtonBlock: blockPositiveButton, isNegativeButton: isNegativeButton, negativeButtonText: negativeButtonText, negativeButtonBlock: blockNegativeButton, isNeutralButton: isNeutralButton, neutralButtonText: neutralButtonText, neutralButtonBlock: blockNegativeButton, dialogType: dialogType, isAutoDismiss: isAutoDismiss)
+                self.alertDialog?.initial(dialogTitle: dialogTitle, dialogMessage: dialogMessage, configuration: configuration,
+                                          isNegativeButton: isNegativeButton, negativeButtonText: negativeButtonText, negativeButtonBlock: blockNegativeButton, isPositiveButton: isPositiveButton, positiveButtonText: positiveButtonText, positiveButtonBlock: blockPositiveButton, isNeutralButton: isNeutralButton, neutralButtonText: neutralButtonText, neutralButtonBlock: blockNegativeButton, dialogType: dialogType, isAutoDismiss: isAutoDismiss)
             }
             UIView.animate(withDuration: 0.5) {
                 self.viewController?.present(self.alertDialog!, animated: true, completion: nil)
@@ -467,8 +468,8 @@ class CLBLottieDialogView: UIViewController {
 
 extension CLBLottieDialogView.Builder {
     static func successDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Success!", dialogMessage: String
-                              , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                               , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
+                              , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                               , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
@@ -481,8 +482,8 @@ extension CLBLottieDialogView.Builder {
     }
 
     static func warningDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Warning!", dialogMessage: String
-                              , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                               , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
+                              , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                               , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
@@ -495,8 +496,8 @@ extension CLBLottieDialogView.Builder {
     }
 
     static func questionDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Question!", dialogMessage: String
-                               , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                                , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
+                               , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                                , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)
@@ -509,8 +510,8 @@ extension CLBLottieDialogView.Builder {
     }
 
     static func errorDialog(_ viewController: UIViewController, configuration: CLBLottieDialogView.Configuration = CLBLottieDialogView.Configuration(), dialogTitle: String = "Error!", dialogMessage: String
-                            , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                             , negativeButtonText: String? = nil, blockNegative: CLBLottieDialogViewBlock = nil
+                            , positiveButtonText: String = "OK", blockPositive: CLBLottieDialogViewBlock = nil
                             , neutralButtonText: String? = nil, blockNeutral: CLBLottieDialogViewBlock = nil) {
         let builder = CLBLottieDialogView.Builder(viewController: viewController)
             .withTitle(title: dialogTitle)

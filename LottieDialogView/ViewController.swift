@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         config.titleSize = 32.0
         config.containerCornerRadius = 2.0
 
-        CLBLottieDialogView.Builder.successDialog(self, configuration: config, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
+        CLBLottieDialogView.Builder.successDialog(self, configuration: config, dialogMessage: "Message", negativeButtonText: "Negative",positiveButtonText: "OK", blockPositive: { (dialog) in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 CLBLottieDialogView.Builder.warningDialog(self, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                     }
                 })
             }
-        }, negativeButtonText: nil, neutralButtonText: nil)
+        } ,neutralButtonText: "Neutral")
     }
 
 }
