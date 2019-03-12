@@ -346,7 +346,6 @@ class CLBLottieDialogView: UIViewController {
         case WARNING = 2
         case ERROR = 3
         case PROGRESS = 4
-        case CUSTOM = 5 // need lottie json
     }
 
     class Configuration {
