@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  LottieDialogView
 //
-//  Created by Oflu  on 8.03.2019.
+//  Created by Emre Celebi  on 8.03.2019.
 //  Copyright © 2019 cLB. All rights reserved.
 //
 

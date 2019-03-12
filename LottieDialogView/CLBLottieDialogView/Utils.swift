@@ -2,7 +2,7 @@
 //  Utils.swift
 //  LottieDialogView
 //
-//  Created by Oflu  on 11.03.2019.
+//  Created by Emre Celebi  on 11.03.2019.
 //  Copyright © 2019 cLB. All rights reserved.
 //
 
