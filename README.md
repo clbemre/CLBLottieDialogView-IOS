@@ -8,7 +8,7 @@ This repository provides a alert dialog view with lottie customization.
 ### For Android
 See [LottieAlertDialog](https://github.com/mayuce/LottieAlertDialog/blob/master/readme.adoc)
 
-### Requirements
+### Requirements Library
 ```
 pod 'lottie-ios'
 pod 'SnapKit', '~> 4.0.0'
