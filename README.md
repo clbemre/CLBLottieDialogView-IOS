@@ -31,7 +31,7 @@ so all files
 
 ### Usage Dialog
 You may follow the source code to see how it works.
-```
+```swift
 let config = CLBLottieDialogView.Configuration()
         config.backgroundColor = UIColor.red
         config.titleColor = UIColor.white
@@ -52,7 +52,7 @@ let builder = CLBLottieDialogView.Builder(viewController: viewController)
 builder.show(dialogType: CLBLottieDialogView.DialogType.SUCCESS, isAutoDismiss: true)
 ```
 ### OR use extension
-```
+```swift
 CLBLottieDialogView.Builder.successDialog(self, dialogMessage: "Message", positiveButtonText: "OK"
 , blockPositive: { (dialog) in
             // Positive Block
@@ -60,7 +60,7 @@ CLBLottieDialogView.Builder.successDialog(self, dialogMessage: "Message", positi
 ```
 
 ### Usage Progress View
-```
+```swift
  let builder = CLBLottieDialogView.Builder.progressDialog(self, dialogMessage: "Message")
  builder.showProgress()
  // builder.hideDialog()
