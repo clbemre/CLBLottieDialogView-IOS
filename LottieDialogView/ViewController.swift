@@ -23,13 +23,13 @@ class ViewController: UIViewController {
     }
 
     @IBAction func OpenAlert(_ sender: UIButton) {
-        CLBLottieDialogView.Builder.successDialog(self, dialogMessage: "Message", positiveButtonText: "Tamam", blockPositive: { (dialog) in
+        CLBLottieDialogView.Builder.successDialog(self, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                CLBLottieDialogView.Builder.warningDialog(self, dialogMessage: "Message", positiveButtonText: "Tamam", blockPositive: { (dialog) in
+                CLBLottieDialogView.Builder.warningDialog(self, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        CLBLottieDialogView.Builder.questionDialog(self, dialogMessage: "Message", positiveButtonText: "Tamam", blockPositive: { (dialog) in
+                        CLBLottieDialogView.Builder.questionDialog(self, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                CLBLottieDialogView.Builder.errorDialog(self, dialogMessage: "Message", positiveButtonText: "Tamam", blockPositive: { (dialog) in
+                                CLBLottieDialogView.Builder.errorDialog(self, dialogMessage: "Message", positiveButtonText: "OK", blockPositive: { (dialog) in
 
                                 })
                             }
