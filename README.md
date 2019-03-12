@@ -1,9 +1,9 @@
 # CLBLottieDialogView-IOS
 This repository provides a alert dialog view with lottie customization.
 
-[Screen Shot Dialog View](LottieDialogView/ScreenShot/DialogView.png[200,400])
+[Screen Shot Dialog View](https://github.com/clbemre/CLBLottieDialogView-IOS/blob/master/LottieDialogView/ScreenShot/DialogView.png)
 
-[Screen Shot Progress View](LottieDialogView/ScreenShot/ProgressView.png[200,400])
+[Screen Shot Progress View](https://github.com/clbemre/CLBLottieDialogView-IOS/blob/master/LottieDialogView/ScreenShot/ProgressView.png)
 
 ### For Android
 See [LottieAlertDialog](https://github.com/mayuce/LottieAlertDialog/blob/master/readme.adoc)
